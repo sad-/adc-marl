@@ -10,6 +10,7 @@ import tensorflow.contrib.layers as layers
 import dqn
 from dqn_utils import *
 from atari_wrappers import *
+from atari_env import *
 
 
 def atari_model(img_in, num_actions, scope, reuse=False):
@@ -105,8 +106,8 @@ def get_session():
 def get_env(task, seed):
     env_id = task.env_id
 
-    env = gym.make(env_id)
-
+    # env = gym.make(env_id)
+    env = AtariEnv(obs_type='image');
     set_global_seeds(seed)
     env.seed(seed)
 
