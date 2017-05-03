@@ -104,25 +104,27 @@ def get_session():
     return session
 
 def get_env(task, seed):
-    env_id = task.env_id
+    #env_id = task.env_id
 
-    # env = gym.make(env_id)
-    env = AtariEnv(obs_type='image');
+    env = gym.make(task)
+    #env = AtariEnv(obs_type='image', game='Pong2Player');
     set_global_seeds(seed)
     env.seed(seed)
 
     expt_dir = '/tmp/hw3_vid_dir2/'
     env = wrappers.Monitor(env, osp.join(expt_dir, "gym"), force=True)
     env = wrap_deepmind(env)
-
+    print env
+    assert False
     return env
 
 def main():
     # Get Atari games.
-    benchmark = gym.benchmark_spec('Atari40M')
+    #benchmark = gym.benchmark_spec('Atari40M')
 
     # Change the index to select a different game.
-    task = benchmark.tasks[3]
+    #task = benchmark.tasks[3]
+    task = "Tennis-v0";
 
     # Run training
     seed = 0 # Use a seed of zero (you may want to randomize the seed!)

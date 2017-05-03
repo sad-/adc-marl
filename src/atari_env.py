@@ -29,15 +29,13 @@ class AtariEnv(gym.Env, utils.EzPickle):
         utils.EzPickle.__init__(self, game, obs_type)
         assert obs_type in ('ram', 'image')
 
-        # self.game_path = atari_py.get_game_path(game)
-        self.game_path = os.path.join(os.path.abspath(".."), "roms/Pong2Player.bin")
+        self.game_path = atari_py.get_game_path(game)
+        # self.game_path = os.path.join(os.path.abspath(".."), "roms/Pong2Player0.bin")
         if not os.path.exists(self.game_path):
             raise IOError('You asked for game %s but path %s does not exist'%(game, self.game_path))
         self._obs_type = obs_type
         self.frameskip = frameskip
         self.ale = atari_py.ALEInterface()
-        self.viewer = None
-        print self.ale.obj
 
         # Tune (or disable) ALE's action repeat:
         # https://github.com/openai/gym/issues/349

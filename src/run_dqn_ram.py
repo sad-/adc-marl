@@ -1,6 +1,9 @@
 import argparse
+import cv2
 import gym
 from gym import wrappers
+import gym_soccer
+import simple_gym_soccer
 import os.path as osp
 import random
 import numpy as np
@@ -99,14 +102,14 @@ def get_session():
     return session
 
 def get_env(seed):
-    env = gym.make('Pong-ram-v0')
+    env = gym.make('MultiOneSoccer-v0')
 
     set_global_seeds(seed)
     env.seed(seed)
 
     expt_dir = '/tmp/hw3_vid_dir/'
     env = wrappers.Monitor(env, osp.join(expt_dir, "gym"), force=True)
-    env = wrap_deepmind_ram(env)
+    #env = wrap_deepmind_ram(env)
 
     return env
 
